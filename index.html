@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Todo list</title>
+    <link rel="stylesheet" href="style.css">  
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+	<div id = "app">
+        <div class="header">
+            <form name = "add_elem" action="">
+            <input type="text" placeholder="Введите элемент" v-model="elem" v-on:keypress.enter.prevent ="addElement">
+            <button class="addelement" v-on:click.prevent="addElement">Добавить</button>
+        </form>
+        </div>
+        <div class="conclusion">
+            <div class="scheduled">
+                <p>Запланированные дела:</p>
+                <p>{{count}}</p>
+            </div>
+            <div class="done">
+                <p>Выполненные дела:</p>
+                <p>{{cont}}</p>
+            </div>         
+        </div>                 
+	    <div class="list">	
+            <li v-for="(element,index) in elems">
+               <div class="text" v-bind:class="{'strike':element.status}">
+                   <p>{{element.message}}</p>
+               </div>
+               <div class="butt">
+                   <button class="buttondelet" v-on:click="element.status=!element.status" @click="performedElements(index)" v-bind:class="{'redefinition':element.status}">           <span>✓</span>
+                   Выполнено
+                   </button>
+               </div>			
+            </li>
+		</div>
+        <div class="delete">
+        <button class="buttondell" @click="deleteElement()">Удалить выполненные</button>
+        </div>
+    </div>
+<script src="main.js"></script>
+</body>
+</html>
